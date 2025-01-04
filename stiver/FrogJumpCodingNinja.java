@@ -32,6 +32,25 @@ public class FrogJumpCodingNinja {
         return dp[dp.length - 1];
     }
 
+    public static int frogJumpTabulationSpaceOptimized(int[] heights){
+        int prev = 0;
+        int prev2 = 0;
+        int curr = 0;
+
+        for(int i = 1; i < heights.length; i++){
+            int firtStep = prev + Math.abs(heights[i] - heights[i - 1]);
+            int secondStep = Integer.MAX_VALUE;
+            if(i > 1){
+                secondStep = prev2 + Math.abs(heights[i] - heights[i - 2]);
+            }
+            curr = Math.min(firtStep, secondStep);
+            prev2 = prev;
+            prev = curr;
+        }
+
+        return curr;
+    }
+
     public static void main(String[] args) {
         int[] heights = {7, 4, 4, 2, 6, 6, 3, 4 };
         int[] dp = new int[heights.length];
@@ -39,6 +58,7 @@ public class FrogJumpCodingNinja {
 
         int res = frogJumpRecursive(7, heights, dp);
         int res2 = frogJumpTabulation(heights);
-        System.out.println(res2);
+        int res3 = frogJumpTabulationSpaceOptimized(heights);
+        System.out.println(res3);
     }
 }
