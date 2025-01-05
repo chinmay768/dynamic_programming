@@ -13,7 +13,7 @@ public class FrogJumpCodingNinja {
         if(idx > 1)
             right = frogJumpRecursive(idx - 2, heights, dp) + Math.abs(heights[idx] - heights[idx - 2]);
 
-        return Math.min(left, right);
+        return dp[idx] = Math.min(left, right);
     }
 
     public static int frogJumpTabulation(int[] heights){
@@ -59,6 +59,6 @@ public class FrogJumpCodingNinja {
         int res = frogJumpRecursive(7, heights, dp);
         int res2 = frogJumpTabulation(heights);
         int res3 = frogJumpTabulationSpaceOptimized(heights);
-        System.out.println(res3);
+        System.out.println(res);
     }
 }
