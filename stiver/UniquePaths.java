@@ -1,5 +1,7 @@
 package stiver;
 
+import java.util.Arrays;
+
 public class UniquePaths {
 
     public static int uniquePathsRecursion(int m, int n) {
@@ -62,11 +64,33 @@ public class UniquePaths {
         return dp[m - 1][n - 1];
     }
 
+    public static int uniquePathsTabulationSpaceOptimize(int m, int n){
+        int[] prevRow = new int[n];
+        Arrays.fill(prevRow, 0);
+
+        for(int i = 0; i < m; i++){
+            int[] currRow = new int[n];
+            for(int j = 0; j < n; j++){
+                if(i == 0 && j == 0) currRow[j] = 1;
+                else{
+                    int bottom = 0;
+                    int right = 0;
+                    if(i > 0) bottom = prevRow[j];
+                    if(j > 0) right = currRow[j - 1];
+                    currRow[j] = bottom + right;
+                }
+            }
+            prevRow = currRow;
+        }
+
+        return prevRow[n - 1];
+    }
+
     public static void main(String[] args) {
         // Here m x n is the size of the matrix
         int m = 3;
         int n = 7;
 
-        System.out.println(uniquePathsTabulation(m, n));
+        System.out.println(uniquePathsTabulationSpaceOptimize(m, n));
     }
 }
