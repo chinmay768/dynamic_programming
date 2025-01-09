@@ -1,5 +1,7 @@
 package stiver;
 
+import java.util.Arrays;
+
 public class UniquePaths2 {
 
     public static int uniquePathsRecursion(int[][] obstacleGrid){
@@ -68,9 +70,34 @@ public class UniquePaths2 {
         return  dp[dp.length - 1][dp[0].length - 1];
     }
 
+    public static int uniquePathsTabulationOptimized(int[][] obstacleGrid){
+        int[] prev = new int[obstacleGrid[0].length];
+        Arrays.fill(prev, 0);
+
+        for(int row = 0; row < obstacleGrid.length; row++){
+            int[] curr = new int[obstacleGrid[0].length];
+            for(int col = 0; col < obstacleGrid[0].length; col++){
+                if(obstacleGrid[row][col] == 1) curr[col] = 0;
+                else if(row == 0 && col == 0) curr[col] = 1;
+                else {
+                    int right = 0;
+                    if(col > 0) right = curr[col - 1];
+
+                    int bottom = 0;
+                    if(row > 0) bottom = prev[col];
+
+                    curr[col] = right + bottom;
+                }
+            }
+            prev = curr;
+        }
+
+        return  prev[prev.length - 1];
+    }
+
     public static void main(String[] args) {
         int[][] grid = {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
 
-        System.out.println(uniquePathsTabulation(grid));
+        System.out.println(uniquePathsTabulationOptimized(grid));
     }
 }
