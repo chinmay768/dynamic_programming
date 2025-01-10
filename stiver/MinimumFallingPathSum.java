@@ -86,9 +86,40 @@ public class MinimumFallingPathSum {
         return res;
     }
 
+    public static int minFallingPathSumTabulationOptimized(int[][] matrix){
+        int[] prev = new int[matrix.length];
+
+        for(int i = 0; i < matrix[0].length; i++){
+            prev[i] = matrix[0][i];
+        }
+
+        for(int i = 1; i < matrix.length; i++){
+            int[] curr = new int[matrix[i].length];
+            for(int j = 0; j < matrix[i].length; j++){
+                int leftDiag = Integer.MAX_VALUE;
+                if(j > 0) leftDiag = matrix[i][j] + prev[j - 1];
+
+                int up = matrix[i][j] + prev[j];
+
+                int rightDiag = Integer.MAX_VALUE;
+                if(j < matrix[i].length - 1) rightDiag = matrix[i][j] + prev[j + 1];
+
+                curr[j] = Math.min(leftDiag, Math.min(up, rightDiag));
+            }
+            prev = curr;
+        }
+
+        int res = Integer.MAX_VALUE;
+        for(int i = 0; i < matrix[matrix.length - 1].length; i++){
+            res = Math.min(res, prev[i]);
+        }
+
+        return res;
+    }
+
     public static void main(String[] args) {
         int[][] matrix = {{2,1,3},{6,5,4},{7,8,9}};
 
-        System.out.println(minFallingPathSumTabulation(matrix));
+        System.out.println(minFallingPathSumTabulationOptimized(matrix));
     }
 }
