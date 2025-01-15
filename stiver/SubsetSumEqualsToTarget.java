@@ -1,5 +1,7 @@
 package stiver;
 
+import java.util.Arrays;
+
 public class SubsetSumEqualsToTarget {
 
     public static Boolean subsetSumEqualsToTargetRecursion(int[] arr, int idx, int target){
@@ -55,7 +57,7 @@ public class SubsetSumEqualsToTarget {
             dp[i][0] = true;
         }
 
-        dp[0][arr[0]] = true; // If idx is 0 then only the element present at idx 0 is marked as true
+        if(target >= arr[0]) dp[0][arr[0]] = true; // If idx is 0 then only the element present at idx 0 is marked as true
 
         for(int i = 1; i < arr.length; i++){
             for(int tgt = 1; tgt <= target; tgt++){
@@ -70,11 +72,35 @@ public class SubsetSumEqualsToTarget {
         return dp[arr.length - 1][target];
     }
 
+    public static Boolean subsetSumEqualsToTargetRecursionTabulationSpaceOptimized(int[] arr, int target){
+        Boolean[] prev = new Boolean[target + 1];
+        Arrays.fill(prev, false);
+
+        prev[0] = true;
+
+        if(target >= arr[0]) prev[arr[0]] = true; // If idx is 0 then only the element present at idx 0 is marked as true
+
+        for(int i = 1; i < arr.length; i++){
+            Boolean[] curr = new Boolean[target + 1];
+            curr[0] = true;
+            for(int tgt = 1; tgt <= target; tgt++){
+                boolean excl = prev[tgt];
+
+                boolean incl = false;
+                if(arr[i] <= tgt) incl = prev[tgt - arr[i]];
+
+                curr[tgt] = excl || incl;
+            }
+            prev = curr;
+        }
+        return prev[target];
+    }
+
     public static void main(String[] args) {
         int[] arr = {2, 1, 5, 3, 9, 3};
-        int target = 15;
+        int target = 8;
 
 //        System.out.println(subsetSumEqualsToTargetRecursionDP(arr, arr.length - 1, target));
-        System.out.println(subsetSumEqualsToTargetRecursionTabulation(arr, target));
+        System.out.println(subsetSumEqualsToTargetRecursionTabulationSpaceOptimized(arr, target));
     }
 }
