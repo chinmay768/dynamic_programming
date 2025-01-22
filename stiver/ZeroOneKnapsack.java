@@ -10,7 +10,7 @@ public class ZeroOneKnapsack {
     public static int knapsackRecursionHelper(int[] weights, int[] values, int idx, int space){
         if(idx == 0){
             if(weights[0] <= space) return values[0];
-            else return 0; // Why can't we take Math.MIN_VALUE here
+            else return 0; // Why can't we take Math.MIN_VALUE here bc if not take then the value will be 0
         }
 
         int excl = knapsackRecursionHelper(weights, values, idx - 1, space);
