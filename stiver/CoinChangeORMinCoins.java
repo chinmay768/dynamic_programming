@@ -71,10 +71,35 @@ public class CoinChangeORMinCoins {
         return res;
     }
 
+    public static int coinChangeTabulationSpaceOptimized(int[] coins, int amount){
+        int[] prev = new int[amount + 1];
+        for(int i = 0; i <= amount; i++){
+            if(i % coins[0] == 0) prev[i] = i / coins[0];
+            else prev[i] = (int) 1e9;
+        }
+
+        for(int i = 1; i < coins.length; i++){
+            int[] curr = new int[amount + 1];
+            for(int j = 0; j <= amount; j++){
+                int excl = prev[j];
+
+                int incl = Integer.MAX_VALUE;
+                if(coins[i] <= j) incl = 1 + curr[j - coins[i]];
+
+                curr[j] = Math.min(excl, incl);
+            }
+            prev = curr;
+        }
+
+        int res = prev[amount];
+        if(res >= 1e9) return -1;
+        return res;
+    }
+
     public static void main(String[] args) {
         int[] coins = {1,2,5};
         int amount = 11;
 
-        System.out.println(coinChangeTabulation(coins, amount));
+        System.out.println(coinChangeTabulationSpaceOptimized(coins, amount));
     }
 }
