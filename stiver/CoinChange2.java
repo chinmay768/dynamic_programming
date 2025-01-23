@@ -45,11 +45,36 @@ public class CoinChange2 {
         return dp[idx][amount] = excl + incl;
     }
 
+    public static int coinChangeTabulation(int amount, int[] coins){
+        int[][] dp = new int[coins.length][amount + 1];
+
+        for(int i = 0; i <= amount; i++){
+            if(i % coins[0] == 0){
+                dp[0][i] = 1;
+            }else {
+                dp[0][i] = 0;
+            }
+        }
+
+        for(int i = 1; i < coins.length; i++){
+            for(int j = 0; j <= amount; j++){
+                int excl = dp[i - 1][j];
+
+                int incl = 0;
+                if(coins[i] <= j) incl = dp[i][j - coins[i]];
+
+                dp[i][j] = incl + excl;
+            }
+        }
+
+        return dp[dp.length - 1][amount];
+    }
+
     public static void main(String[] args) {
         int[] coins = {1,2,5};
 
         int amount = 5;
 
-        System.out.println(coinChangeRecursionDP(amount, coins));
+        System.out.println(coinChangeTabulation(amount, coins));
     }
 }
