@@ -23,13 +23,13 @@ public class LongestCommonSubstring {
         return Math.max(matchCount, Math.max(exclI, excclJ));
     }
 
-    public static int longestCommonSubstringRecursionDP(String str1, String str2){
-        int[][] dp = new int[str1.length() + 1][str2.length() + 1];
-        for(int i = 0; i < dp.length; i++){
-            Arrays.fill(dp[i], -1);
-        }
-        return longestCommonSubstringRecursionHelperDP(str1, str2, str1.length() - 1, str2.length() - 1 , 0, dp);
-    }
+//    public static int longestCommonSubstringRecursionDP(String str1, String str2){
+//        int[][] dp = new int[str1.length() + 1][str2.length() + 1];
+//        for(int i = 0; i < dp.length; i++){
+//            Arrays.fill(dp[i], -1);
+//        }
+//        return longestCommonSubstringRecursionHelperDP(str1, str2, str1.length() - 1, str2.length() - 1 , 0, dp);
+//    }
 
     // This type of dp won't work because if you use index then idx i j will be previously visited but with diff  lenSoFar thus won't consider recomputing
     // the max len again for those idx
@@ -85,6 +85,6 @@ public class LongestCommonSubstring {
         String str1 = "tsi";
         String str2 = "sit";
 
-        System.out.println(longestCommonSubstringRecursionDP(str1, str2));
+        System.out.println(longestCommonSubstringRecursion(str1, str2));
     }
 }
