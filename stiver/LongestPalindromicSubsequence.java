@@ -2,7 +2,7 @@ package stiver;
 
 public class LongestPalindromicSubsequence {
 
-    public static int longestCommonSubsequenceRecursionTabulation(String text1, String text2){
+    public static int longestCommonSubsequenceTabulation(String text1, String text2){
         int[][] dp = new int[text1.length() + 1][text2.length() + 1];
 
         for(int i = 0; i < dp.length; i++){
@@ -33,7 +33,7 @@ public class LongestPalindromicSubsequence {
         String str1 = "bbbab";
         String str2 = revString(str1);
 
-        System.out.println(longestCommonSubsequenceRecursionTabulation(str1, str2));
+        System.out.println(longestCommonSubsequenceTabulation(str1, str2));
     }
 
 }
