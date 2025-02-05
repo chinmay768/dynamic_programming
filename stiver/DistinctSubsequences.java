@@ -47,7 +47,7 @@ public class DistinctSubsequences {
     public static int distinctSubsequenceTabulation(String str1, String str2){
         int[][] dp = new int[str1.length() + 1][str2.length() + 1];
 
-        // Here also first j is computed and then i
+        // Here also first j is computed and then i because if both i and j are exhausted
         for (int j = 0; j < dp[0].length; j++){
             dp[0][j] = 0;
         }
