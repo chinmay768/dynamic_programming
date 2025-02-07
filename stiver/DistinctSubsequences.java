@@ -73,7 +73,6 @@ public class DistinctSubsequences {
         String str1 = "rabbbit";
         String str2 = "rabbit";
 
-
         System.out.println(distinctSubsequenceTabulation(str1, str2));
     }
 }
