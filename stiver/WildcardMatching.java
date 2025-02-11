@@ -92,7 +92,7 @@ public class WildcardMatching {
         for(int i = 1; i <= str1.length(); i++){
             for(int j = 1; j <= str2.length(); j++){
                 if(str1.charAt(i - 1) == str2.charAt(j - 1) ||
-                str1.charAt(i) == '?'){
+                str1.charAt(i - 1) == '?'){
                     dp[i][j] = dp[i - 1][j - 1];
                 }
                 else if(str1.charAt(i - 1) == '*'){
