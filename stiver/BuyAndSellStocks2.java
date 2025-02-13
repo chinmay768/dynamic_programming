@@ -53,14 +53,34 @@ public class BuyAndSellStocks2 {
         }
     }
 
-//
-//    public static int maxProfitTabulation(int[] prices){
-//
-//    }
+
+    public static int maxProfitTabulation(int[] prices){
+        int[][] dp = new int[prices.length + 1][2];
+
+        dp[0][0] = dp[0][1] = 0;
+
+        for(int i = 1; i <= prices.length; i++){
+            for(int j = 0; j <= 1; j++){
+                if(j == 0 && i != 1){ // sell
+                    dp[i][j] = Math.max(
+                            prices[i - 1] + dp[i - 1][1],
+                            dp[i - 1][0]
+                    );
+                }else { // buy
+                    dp[i][j] = Math.max(
+                            -prices[i - 1] + dp[i - 1][0],
+                            dp[i - 1][0]
+                    );
+                }
+            }
+        }
+
+        return Math.max(dp[prices.length][0], dp[prices.length][1]);
+    }
 
     public static void main(String[] args) {
         int[] prices = {1,2,3,4,5};
 
-        System.out.println(maxProfitRecursionDP(prices));
+        System.out.println(maxProfitTabulation(prices));
     }
 }
