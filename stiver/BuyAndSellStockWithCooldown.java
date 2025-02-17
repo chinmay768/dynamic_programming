@@ -52,16 +52,30 @@ public class BuyAndSellStockWithCooldown {
         }
     }
 
-//    public static int maxProfitTabulation(int[] prices){
-//        int[][] dp = new int[prices.length + 2][2];
-//
-//        for(int i = 0; i <= 1; i++){
-//            dp[prices]
-//        }
-//    }
+    public static int maxProfitTabulation(int[] prices){
+        int[][] dp = new int[prices.length + 2][2];
+
+        for(int idx = prices.length - 1; idx >= 0; idx--){
+            for(int buy = 0; buy <= 1; buy++){
+                if(buy == 1){
+                    dp[idx][buy] = Math.max(
+                            -prices[idx] + dp[idx + 1][0],
+                            dp[idx + 1][1]
+                    );
+                }else {
+                    dp[idx][buy] = Math.max(
+                            prices[idx] + dp[idx + 2][1],
+                            dp[idx + 1][0]
+                    );
+                }
+            }
+        }
+
+        return dp[0][1];
+    }
 
     public static void main(String[] args) {
         int[] prices = {6,1,3,2,4,7};
-        System.out.println(maxProfitRecursionDP(prices));
+        System.out.println(maxProfitTabulation(prices));
     }
 }
