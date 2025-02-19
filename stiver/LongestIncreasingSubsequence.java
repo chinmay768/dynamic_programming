@@ -71,32 +71,12 @@ public class LongestIncreasingSubsequence {
 //        return res;
 //    }
 
-    public static int lengthOfLISTabulation(int[] nums){
-        int[][] dp = new int[nums.length + 1][nums.length + 1];
-
-//        for(int prevIdx = 0; prevIdx <= nums.length; prevIdx++){// for any prevIdx if idx is -1 then return 0
-//            dp[nums.length][prevIdx] = 0;
-//        }
-//        idx 0 to n and  prev 0 to n
-        for(int idx = nums.length - 1; idx >= 0; idx--){// start form nums.len - 1 because base case is nums.len
-            for(int prevIdx = nums.length; prevIdx > idx ; prevIdx--){
-                int takeLen = 0;
-                if(prevIdx == nums.length || nums[idx] > nums[prevIdx]){// Take      // We are not doing idx - 1 and prevIdx - 1 because
-                    takeLen = 1 + dp[idx + 1][prevIdx];
-                }
-
-                int notTakeLen = dp[idx + 1][prevIdx];
-
-                dp[idx][prevIdx] = Math.max(takeLen, notTakeLen);
-            }
-        }
-        return  dp[0][0];
-    }
+    // FIXME: Longest Increasing Subsequence
 
 
     public static void main(String[] args) {
-        int[] nums = {4,10,4,3,8,9};
+        int[] nums = {10,9,2,5,3,7,101,18};
 
-        System.out.println(lengthOfLISTabulation(nums));
+//        System.out.println(lengthOfLISTabulation(nums));
     }
 }
