@@ -46,6 +46,5 @@ public class PrintingLongestCommonSubsequence {
         int[] arr = {10,9,2,5,3,7,101,18};
 
         printLIS(arr);
-        System.out.println();
     }
 }
