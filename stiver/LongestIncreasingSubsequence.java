@@ -1,5 +1,6 @@
 package stiver;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LongestIncreasingSubsequence {
@@ -73,10 +74,29 @@ public class LongestIncreasingSubsequence {
 
     // FIXME: Longest Increasing Subsequence
 
+    public static int lengthOfLISTabulation(int[] nums){
+        int[] dp = new int[nums.length];
+
+        // Because every element is a part of subsequence starting from itself
+        Arrays.fill(dp, 1);
+
+        int maxLen = 1; // Max len is 1 bc every element is a part of subsequence starting from itself
+        for(int i = 1; i < nums.length; i++){ // Skipping first idx bc its always be 1 as there's not elm before it
+            for(int prev_idx = 0; prev_idx < i; prev_idx++){
+                if(nums[i] > nums[prev_idx]){
+                    dp[i] = Math.max(dp[i], dp[prev_idx] + 1);
+                }
+            }
+            maxLen = Math.max(maxLen, dp[i]);
+        }
+
+        return maxLen;
+    }
+
 
     public static void main(String[] args) {
         int[] nums = {10,9,2,5,3,7,101,18};
 
-//        System.out.println(lengthOfLISTabulation(nums));
+        System.out.println(lengthOfLISTabulation(nums));
     }
 }
