@@ -70,6 +70,7 @@ public class MinimumCostToCutAStick {
     public static void main(String[] args) {
         int[] cuts = {3, 5, 1, 4};
 
+
         System.out.println(minCostDP(7, cuts));
     }
 }
