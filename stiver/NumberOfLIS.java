@@ -39,5 +39,6 @@ public class NumberOfLIS {
     public static void main(String[] args) {
         int[] arr = {2,2,2,2,2};
         System.out.println(numberOfLIS(arr));
+
     }
 }
