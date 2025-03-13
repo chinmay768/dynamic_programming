@@ -64,7 +64,6 @@ public class PalindromePartitioning2 {
     public static void main(String[] args) {
         String str = "aab";
 
-
         System.out.println(palindromePartitioningRecursionDP(str) - 1);
     }
 }
